@@ -8,7 +8,7 @@
         <dataSource type="SIMPLE">
 
             <property name="JDBC.Driver" value="com.mysql.jdbc.Driver"/>
-            <property name="JDBC.ConnectionURL" value="jdbc:mysql://localhost:3000/DeviceMngt"/>
+            <property name="JDBC.ConnectionURL" value="jdbc:mysql://127.0.0.1:3306/DeviceMngt"/>
             <property name="JDBC.Username" value="root"/>
             <property name="JDBC.Password" value="livet"/>
             <property name="JDBC.AutoCommit" value="true"/>

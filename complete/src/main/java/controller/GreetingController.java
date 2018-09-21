@@ -23,12 +23,24 @@ public class GreetingController {
     @RequestMapping("/greeting")
     public Greeting greeting(@RequestParam(value="name", defaultValue="World") String name) {
         try {
+            String resource = "/Users/nguyenvandung/Desktop/spring-boot/gs-rest-service/complete/src/main/java/SqlMapConfig.xml";// path of the mybatis configuration file.
+            File file = new File(resource);
+            System.out.println(file.getPath());
+            System.out.println(file.exists());
+
+            BufferedReader br = new BufferedReader(new FileReader(file));
+            String st;
+            while ((st = br.readLine()) != null) {
+                System.out.println(st);
+            }
             Reader rd = Resources.getResourceAsReader("SqlMapConfig.xml");
             SqlMapClient smc = SqlMapClientBuilder.buildSqlMapClient(rd);
 
             int id = 1;
             System.out.println("Going to read employee name.....");
-            Employee e = (Employee) smc.queryForObject ("Employee.getEmpInfo", id);
+            Map <String, Integer> hm = new HashMap();
+            hm.put("acctID", id);
+            Employee e = (Employee) smc.queryForObject ("Employee.getEmpInfo", hm);
 
             System.out.println("First Name:  " + e.getFirstName());
             System.out.println("Record name Successfully ");

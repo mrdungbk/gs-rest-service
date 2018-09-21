@@ -4,7 +4,7 @@
 <sqlMap namespace="Employee">
 
     <!-- Perform Insert Operation -->
-    <insert id="insert" parameterClass="Employee">
+    <insert id="insert" parameterClass="database.entity.Employee">
         INSERT INTO EMPLOYEE(first_name, last_name, salary)
         values (#first_name#, #last_name#, #salary#)
 
@@ -14,12 +14,12 @@
     </insert>
 
     <!-- Perform Read Operation -->
-    <select id="getAll" resultClass="Employee">
+    <select id="getAll" resultClass="database.entity.Employee">
         SELECT * FROM EMPLOYEE
     </select>
 
     <!-- Perform Update Operation -->
-    <update id="update" parameterClass="Employee">
+    <update id="update" parameterClass="database.entity.Employee">
         UPDATE EMPLOYEE
         SET    first_name = #first_name#
         WHERE  id = #id#
@@ -31,13 +31,12 @@
         WHERE  id = #id#
     </delete>
 
-    <!-- To call stored procedure. -->
-    <procedure id="getEmpInfo" resultClass="Employee" parameterMap="getEmpInfoCall">
-        { call getEmp( #acctID# ) }
-    </procedure>
-
     <parameterMap id="getEmpInfoCall" class="map">
         <parameter property="acctID" jdbcType="INT" javaType="java.lang.Integer" mode="IN"/>
     </parameterMap>
 
+    <!-- To call stored procedure. -->
+    <procedure id="getEmpInfo" resultClass="database.entity.Employee" parameterMap="getEmpInfoCall">
+        { call getEmp( #acctID# ) }
+    </procedure>
 </sqlMap>
