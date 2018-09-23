@@ -1,26 +1,21 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE sqlMapConfig PUBLIC "-//ibatis.apache.org//DTD SQL Map Config 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-config-2.dtd">
+<?xml version = "1.0" encoding = "UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
 
-<sqlMapConfig>
-    <settings useStatementNamespaces="true"/>
-
-    <transactionManager type="JDBC">
-        <dataSource type="SIMPLE">
-
-            <property name="JDBC.Driver" value="com.mysql.jdbc.Driver"/>
-            <property name="JDBC.ConnectionURL" value="jdbc:mysql://127.0.0.1:3306/DeviceMngt"/>
-            <property name="JDBC.Username" value="root"/>
-            <property name="JDBC.Password" value="livet"/>
-            <property name="JDBC.AutoCommit" value="true"/>
-            <property name="Pool.MaximumActiveConnections" value="10"/>
-            <property name="Pool.MaximumIdleConnections" value="5"/>
-            <property name="Pool.MaximumCheckoutTime" value="150000"/>
-            <property name="Pool.MaximumTimeToWait" value="500"/>
-            <property name="Pool.PingQuery" value="select 1 from Employee"/>
-            <property name="Pool.PingEnabled" value="false"/>
-
+<environments default = "development">
+    <environment id = "development">
+        <transactionManager type = "JDBC"/>
+        <dataSource type = "POOLED">
+            <property name = "driver" value = "com.mysql.cj.jdbc.Driver"/>
+            <property name = "url" value = "jdbc:mysql://localhost:3306/DeviceMngt"/>
+            <property name = "username" value = "root"/>
+            <property name = "password" value = "livet"/>
         </dataSource>
-    </transactionManager>
+    </environment>
+</environments>
 
-    <sqlMap resource="Employee.xml"/>
-</sqlMapConfig>
+<mappers>
+    <mapper resource = "Student.xml"/>
+</mappers>
+
+</configuration>

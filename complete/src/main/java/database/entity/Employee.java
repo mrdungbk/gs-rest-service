@@ -49,4 +49,16 @@ public class Employee {
         this.salary = salary;
     }
 
+    @Override
+    public String toString()
+    {
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("Id = ").append(id).append(" - ");
+        sb.append("first_name = ").append(first_name).append(" - ");
+        sb.append("last_name = ").append(last_name).append(" - ");
+        sb.append("salary = ").append(salary).append(" - ");
+        return sb.toString();
+    }
+
 } /* End of Employee */

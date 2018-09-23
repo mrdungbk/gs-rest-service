@@ -3,7 +3,7 @@
 
 <mapper namespace = "Student">
 
-    <resultMap id = "result" type = "Student">
+    <resultMap id = "result" type = "database.entity.Student">
         <result property = "id" column = "ID"/>
         <result property = "name" column = "NAME"/>
         <result property = "branch" column = "BRANCH"/>
@@ -12,8 +12,13 @@
         <result property = "email" column = "EMAIL"/>
     </resultMap>
 
-    <select id = "callById" resultMap = "result" parameterType = "Student" statementType = "CALLABLE">
-      {call read_record_byid(#{id, jdbcType = INTEGER, mode = IN})}
-   </select>
+    <parameterMap type="model.in.Param" id="param">
+        <parameter property="id" jdbcType="INTEGER" mode="IN"/>
+        <parameter property="email" jdbcType="text" mode="IN"/>
+    </parameterMap>
+
+    <select id = "callById" resultMap = "result" parameterMap = "param" statementType = "CALLABLE">
+      {call read_recordById(#{id, jdbcType = INTEGER, mode = IN}, #{email, jdbcType = text, mode = IN})}
+    </select>
 
 </mapper>
