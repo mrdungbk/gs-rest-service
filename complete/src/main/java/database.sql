@@ -11,12 +11,12 @@ CREATE TABLE `student` (
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 DELIMITER $$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `read_recordById`(IN emp_id int, IN email text)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `read_recordById`(IN emp_id int, IN emp_email text)
 BEGIN
     SELECT *
     FROM STUDENT
     WHERE ID = emp_id
-      AND EMAIL = email;
+      AND EMAIL = emp_email;
   END$$
 DELIMITER ;
 

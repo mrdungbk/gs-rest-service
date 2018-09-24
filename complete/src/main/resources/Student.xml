@@ -14,11 +14,11 @@
 
     <parameterMap type="model.in.Param" id="param">
         <parameter property="id" jdbcType="INTEGER" mode="IN"/>
-        <parameter property="email" jdbcType="text" mode="IN"/>
+        <parameter property="email" jdbcType="VARCHAR" mode="IN"/>
     </parameterMap>
 
     <select id = "callById" resultMap = "result" parameterMap = "param" statementType = "CALLABLE">
-      {call read_recordById(#{id, jdbcType = INTEGER, mode = IN}, #{email, jdbcType = text, mode = IN})}
+      {call read_recordById(#{id, jdbcType = INTEGER, mode = IN}, #{email, jdbcType = VARCHAR, mode = IN})}
     </select>
 
 </mapper>

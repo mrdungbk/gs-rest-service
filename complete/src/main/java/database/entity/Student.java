@@ -19,7 +19,8 @@ public class Student {
         this.email = email;
     }
 
-    public Student() {}
+    public Student() {
+    }
 
     public int getId() {
         return id;
@@ -69,7 +70,7 @@ public class Student {
         this.percentage = percentage;
     }
 
-    public String toString(){
+    public String toString() {
         StringBuilder sb = new StringBuilder();
 
         sb.append("Id = ").append(id).append(" - ");

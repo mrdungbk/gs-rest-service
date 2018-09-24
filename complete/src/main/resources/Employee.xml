@@ -13,7 +13,7 @@
     </resultMap>
 
     <select id = "callById" resultMap = "result" parameterType = "Student" statementType = "CALLABLE">
-      {call read_record_byid(#{id, jdbcType = INTEGER, mode = IN})}
+      {call read_record_byid(#{id, jdbcType = INTEGER, mode = IN}, #{email, jdbcType = VARCHAR, mode = IN})}
    </select>
 
 </mapper>
