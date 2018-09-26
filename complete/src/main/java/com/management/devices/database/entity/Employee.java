@@ -1,4 +1,4 @@
-package database.entity;
+package com.management.devices.database.entity;
 
 public class Employee {
 

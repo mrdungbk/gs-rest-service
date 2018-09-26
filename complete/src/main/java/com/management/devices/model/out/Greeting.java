@@ -1,4 +1,4 @@
-package model.out;
+package com.management.devices.model.out;
 
 public class Greeting {
 

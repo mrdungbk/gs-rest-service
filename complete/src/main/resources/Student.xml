@@ -3,7 +3,7 @@
 
 <mapper namespace = "Student">
 
-    <resultMap id = "result" type = "database.entity.Student">
+    <resultMap id = "result" type = "com.management.devices.database.entity.Student">
         <result property = "id" column = "ID"/>
         <result property = "name" column = "NAME"/>
         <result property = "branch" column = "BRANCH"/>
@@ -12,7 +12,7 @@
         <result property = "email" column = "EMAIL"/>
     </resultMap>
 
-    <parameterMap type="model.in.Param" id="param">
+    <parameterMap type="com.management.devices.model.in.Param" id="param">
         <parameter property="id" jdbcType="INTEGER" mode="IN"/>
         <parameter property="email" jdbcType="VARCHAR" mode="IN"/>
     </parameterMap>

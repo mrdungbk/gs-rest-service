@@ -1,12 +1,12 @@
-package controller;
+package com.management.devices.controller;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicLong;
 
-import database.entity.Student;
-import model.out.Greeting;
+import com.management.devices.database.entity.Student;
+import com.management.devices.model.out.Greeting;
 import org.apache.ibatis.io.Resources;
 import org.springframework.web.bind.annotation.*;
 

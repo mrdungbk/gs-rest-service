@@ -1,4 +1,4 @@
-package model.in;
+package com.management.devices.model.in;
 
 public class Param {
 
