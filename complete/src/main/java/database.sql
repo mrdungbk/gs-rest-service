@@ -1,6 +1,7 @@
 CREATE DATABASE `devicemngt` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */;
 
 SET SQL_SAFE_UPDATES=0;
+SET GLOBAL log_bin_trust_function_creators = 1;
 
 # for test
 CREATE TABLE `student` (

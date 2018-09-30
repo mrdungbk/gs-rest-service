@@ -25,7 +25,6 @@
         <parameter property="token" jdbcType="VARCHAR" mode="OUT"/>
     </parameterMap>
 
-
     <select id="login" statementType="CALLABLE" parameterMap = "param">
         {CALL login(
             #{user, mode=IN},
@@ -34,6 +33,24 @@
             #{code, jdbcType=VARCHAR, javaType=String, mode=OUT},
             #{description, jdbcType=VARCHAR, javaType=String, mode=OUT},
             #{token, jdbcType=VARCHAR, javaType=String, mode=OUT}
+        )}
+    </select>
+
+    <parameterMap type="com.management.devices.model.in.LogoutInfo" id="logoutParam">
+        <parameter property="user" jdbcType="VARCHAR" mode="IN"/>
+        <parameter property="channelId" jdbcType="INTEGER" mode="IN"/>
+        <parameter property="token" jdbcType="VARCHAR" mode="IN"/>
+        <parameter property="code" jdbcType="VARCHAR" mode="OUT"/>
+        <parameter property="description" jdbcType="VARCHAR" mode="OUT"/>
+    </parameterMap>
+
+    <select id="logout" statementType="CALLABLE" parameterMap = "logoutParam">
+        {CALL logout(
+            #{user, mode=IN},
+            #{channelId, mode=IN},
+            #{token, mode=IN},
+            #{code, jdbcType=VARCHAR, javaType=String, mode=OUT},
+            #{description, jdbcType=VARCHAR, javaType=String, mode=OUT}
         )}
     </select>
 </mapper>

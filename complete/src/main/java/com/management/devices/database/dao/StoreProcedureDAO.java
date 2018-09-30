@@ -20,4 +20,11 @@ public class StoreProcedureDAO {
         session.selectOne("User.login", params);
         session.close();
     }
+
+    public void logout(Map<String, String> params){
+        SqlSessionFactory sqlSessionFactory = ConnectorFactory.getSqlSessionFactory();
+        SqlSession session = sqlSessionFactory.openSession();
+        session.selectOne("User.logout", params);
+        session.close();
+    }
 }

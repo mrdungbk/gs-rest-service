@@ -63,3 +63,64 @@ BEGIN
     SELECT id, user_id, name, phone, address
     FROM agency;
   END
+
+
+#########################################################
+CREATE DEFINER=`root`@`localhost` PROCEDURE `verifySession`(
+	IN pi_uid int,
+    IN pi_channel_id int,
+	IN pi_token text,
+	OUT po_code text,
+	OUT po_descripton text
+)
+BEGIN
+	DECLARE var_time datetime;
+    DECLARE var_id int;
+    set @var_id = 0;
+    SELECT id INTO var_id
+		FROM  user_auth_token
+        where uid = pi_uid and channel_id = pi_channel_id and token = pi_token and status = 1;
+	if(var_id > 0) then
+		#token ton tai
+		SELECT updated_at INTO var_time
+		FROM  user_auth_token
+        where id = var_id;
+        if(ADDTIME(var_time, 1800) > CURRENT_TIMESTAMP) then
+			#token ok
+            update user_auth_token set updated_at = CURRENT_TIMESTAMP where id = var_id;
+            set po_code = '000';
+            set po_descripton = 'Success';
+		else
+			set po_code = '039';
+            set po_descripton = 'Session expired';
+        end if;
+    else
+		#token khong ton tai
+		set po_code = '038';
+		set po_descripton = 'Session ivalid';
+    end if;
+END
+
+################################################################
+CREATE DEFINER=`root`@`localhost` PROCEDURE `logout`(
+	IN pi_user text,
+    IN pi_channel_id int,
+    IN	po_token text,
+    OUT po_code text,
+    OUT	po_description text
+)
+BEGIN
+	DECLARE var_uid int;
+    DECLARE var_verify int;
+	set @var_uid = 0;
+    set @var_verify = 0;
+
+	SELECT id INTO var_uid
+		FROM user where user_name = pi_user;
+	CALL verifySession(var_uid, pi_channel_id, po_token, po_code, po_description);
+    if(po_code = '000') then
+		update user_auth_token set status = 0 where uid = var_uid and channel_id = pi_channel_id;
+		set po_code = '000';
+        set po_description = 'Success';
+	end if;
+END
