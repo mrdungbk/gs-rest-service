@@ -13,8 +13,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.Reader;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -27,22 +25,16 @@ public class UserController {
         Logger logger = Logger.getLogger("login");
         logger.info("login is starting");
         logger.info("info => " + body);
-        result.setTransNo(body.get("transNo"));
+        result.setTransNo(body.remove("transNo"));
         try {
-            Reader reader = Resources.getResourceAsReader("SqlMapConfig.xml");
-            SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(reader);
-            SqlSession session = sqlSessionFactory.openSession();
-            List agencies = session.selectList("User.login", body);
-            logger.info(agencies);
-            session.commit();
-            session.close();
-            result.setResponseCode(ResponseCode.SUCCESS.code);
+            Application.storeProcedureDAO.login(body);
+            result.setCode(ResponseCode.SUCCESS.code);
             result.setDescription(ResponseCode.SUCCESS.text);
-            result.setData(agencies);
+            body.remove("pass");
+            result.setData(body);
         } catch (Exception ex) {
             logger.error("error => " + ex);
         }
         return result;
     }
-
 }

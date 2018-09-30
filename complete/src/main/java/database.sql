@@ -1,5 +1,6 @@
 CREATE DATABASE `devicemngt` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */;
 
+SET SQL_SAFE_UPDATES=0;
 
 # for test
 CREATE TABLE `student` (
@@ -23,10 +24,9 @@ BEGIN
 DELIMITER ;
 #######
 
-
 CREATE TABLE `agency` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `user_id` int(11) DEFAULT NULL,
+  `uid` int(11) DEFAULT NULL,
   `name` varchar(100) DEFAULT NULL,
   `phone` varchar(11) DEFAULT NULL,
   `address` varchar(200) DEFAULT NULL,
@@ -88,18 +88,21 @@ CREATE TABLE `user` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+
 CREATE TABLE `user_auth_token` (
-  `uid` int(11) unsigned NOT NULL,
-  `token` varchar(255) CHARACTER SET ascii NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `uid` int(11) NOT NULL,
+  `channel_id` int(11) NOT NULL DEFAULT '1',
+  `token` varchar(255) DEFAULT NULL,
+  `status` int(11) DEFAULT '1',
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`uid`),
-  UNIQUE KEY `ukey01` (`token`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4
 
 CREATE TABLE `user_password` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `user_id` int(11) NOT NULL,
+  `uid` int(11) NOT NULL,
   `salt` varchar(50) DEFAULT NULL,
   `password` varchar(100) DEFAULT NULL,
   `status` int(1) NOT NULL DEFAULT '1',
@@ -107,3 +110,5 @@ CREATE TABLE `user_password` (
   `update_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+

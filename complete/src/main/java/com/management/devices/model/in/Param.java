@@ -1,6 +1,6 @@
 package com.management.devices.model.in;
 
-public class Param {
+public class Param extends BaseParam{
 
     private int id;
     private String email;
@@ -8,9 +8,8 @@ public class Param {
     private String address;
     private String phone;
 
-    public Param(int id, String email) {
-        this.id = id;
-        this.email = email;
+    public Param() {
+        super();
     }
 
     public int getId() {

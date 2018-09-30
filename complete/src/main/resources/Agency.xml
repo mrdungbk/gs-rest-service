@@ -6,7 +6,7 @@
     <resultMap id = "result" type = "com.management.devices.database.entity.Agency">
         <result property = "id" column = "ID"/>
         <result property = "name" column = "NAME"/>
-        <result property = "userId" column = "USER_ID"/>
+        <result property = "userId" column = "UID"/>
         <result property = "phone" column = "PHONE"/>
         <result property = "address" column = "ADDRESS"/>
     </resultMap>
@@ -23,8 +23,22 @@
         )}
     </select>
 
-    <select id = "getAgencyAll" resultMap = "result" statementType = "CALLABLE">
-      {call getAgencyAll()}
+    <parameterMap type="com.management.devices.model.in.PageInfo" id="pageInfo">
+        <parameter property="offset" jdbcType="INTEGER" mode="IN"/>
+        <parameter property="limit" jdbcType="INTEGER" mode="IN"/>
+        <parameter property="total" jdbcType="INTEGER" mode="OUT"/>
+        <parameter property="code" jdbcType="VARCHAR" mode="OUT"/>
+        <parameter property="description" jdbcType="VARCHAR" mode="OUT"/>
+    </parameterMap>
+
+    <select id = "getAgencyAll" resultMap = "result" parameterMap = "pageInfo" statementType = "CALLABLE">
+        {call getAgencyAll(
+            #{offset, jdbcType = INTEGER, mode = IN},
+            #{limit, jdbcType = INTEGER, mode = IN},
+            #{total, jdbcType = INTEGER , javaType=Int, mode = OUT},
+            #{code, jdbcType = VARCHAR , javaType=String, mode = OUT},
+            #{description, jdbcType = VARCHAR , javaType=String, mode = OUT}
+        )}
     </select>
 
 </mapper>

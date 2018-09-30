@@ -16,14 +16,24 @@
         <result property="token" column="@po_token"/>
     </resultMap>
 
+    <parameterMap type="com.management.devices.model.in.LoginInfo" id="param">
+        <parameter property="user" jdbcType="VARCHAR" mode="IN"/>
+        <parameter property="pass" jdbcType="VARCHAR" mode="IN"/>
+        <parameter property="channelId" jdbcType="INTEGER" mode="IN"/>
+        <parameter property="code" jdbcType="VARCHAR" mode="OUT"/>
+        <parameter property="description" jdbcType="VARCHAR" mode="OUT"/>
+        <parameter property="token" jdbcType="VARCHAR" mode="OUT"/>
+    </parameterMap>
 
-    <select id="login" statementType="CALLABLE" resultMap = "loginResult" parameterType="java.util.Map">
+
+    <select id="login" statementType="CALLABLE" parameterMap = "param">
         {CALL login(
-            #{pi_user, mode=IN},
-            #{pi_pass, mode=IN},
-            #{po_code, jdbcType=VARCHAR, javaType=String, mode=OUT},
-            #{po_description, jdbcType=VARCHAR, javaType=String, mode=OUT},
-            #{po_token, jdbcType=VARCHAR, javaType=String, mode=OUT}
+            #{user, mode=IN},
+            #{pass, mode=IN},
+            #{channelId, mode=IN},
+            #{code, jdbcType=VARCHAR, javaType=String, mode=OUT},
+            #{description, jdbcType=VARCHAR, javaType=String, mode=OUT},
+            #{token, jdbcType=VARCHAR, javaType=String, mode=OUT}
         )}
     </select>
 </mapper>

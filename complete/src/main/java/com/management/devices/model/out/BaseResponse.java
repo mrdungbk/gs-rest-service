@@ -5,13 +5,13 @@ import java.io.Serializable;
 public class BaseResponse implements Serializable {
     private boolean result;
     private String transNo;
-    private String responseCode;
+    private String Code;
     private String description;
     private Object data;
 
     public BaseResponse() {
         result = false;
-        responseCode = "999";
+        Code = "999";
         description = "It is default code!";
     }
 
@@ -23,13 +23,13 @@ public class BaseResponse implements Serializable {
         this.result = result;
     }
 
-    public String getResponseCode() {
-        return responseCode;
+    public String getCode() {
+        return Code;
     }
 
-    public void setResponseCode(String responseCode) {
-        this.responseCode = responseCode;
-        if (ResponseCode.SUCCESS.code.equals(responseCode)) {
+    public void setCode(String code) {
+        this.Code = code;
+        if (ResponseCode.SUCCESS.code.equals(code)) {
             this.result = Boolean.TRUE;
         }
     }
@@ -62,7 +62,7 @@ public class BaseResponse implements Serializable {
     public String toString() {
         final StringBuilder sb = new StringBuilder("result=");
         sb.append(result);
-        sb.append(", responseCode='").append(responseCode).append('\'');
+        sb.append(", Code='").append(Code).append('\'');
         sb.append(", description='").append(description).append('\'');
         sb.append(", transNo='").append(transNo).append('\'');
         return sb.toString();
