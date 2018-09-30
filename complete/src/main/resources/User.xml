@@ -1,0 +1,29 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="User">
+    <resultMap id="UserInfoResult" type="com.management.devices.database.entity.User">
+        <id property="id" column="id"/>
+        <result property="userName" column="user_name"/>
+        <result property="status" column="status"/>
+        <result property="agencyId" column="agency_id"/>
+    </resultMap>
+
+    <resultMap id="loginResult" type="com.management.devices.database.entity.LoginResult">
+        <id property="id" column="id"/>
+        <result property="code" column="@po_code"/>
+        <result property="description" column="@po_description"/>
+        <result property="token" column="@po_token"/>
+    </resultMap>
+
+
+    <select id="login" statementType="CALLABLE" resultMap = "loginResult" parameterType="java.util.Map">
+        {CALL login(
+            #{pi_user, mode=IN},
+            #{pi_pass, mode=IN},
+            #{po_code, jdbcType=VARCHAR, javaType=String, mode=OUT},
+            #{po_description, jdbcType=VARCHAR, javaType=String, mode=OUT},
+            #{po_token, jdbcType=VARCHAR, javaType=String, mode=OUT}
+        )}
+    </select>
+</mapper>

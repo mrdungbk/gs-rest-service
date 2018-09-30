@@ -1,0 +1,30 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace = "Agency">
+
+    <resultMap id = "result" type = "com.management.devices.database.entity.Agency">
+        <result property = "id" column = "ID"/>
+        <result property = "name" column = "NAME"/>
+        <result property = "userId" column = "USER_ID"/>
+        <result property = "phone" column = "PHONE"/>
+        <result property = "address" column = "ADDRESS"/>
+    </resultMap>
+
+    <parameterMap type="com.management.devices.model.in.Param" id="param">
+        <parameter property="id" jdbcType="INTEGER" mode="IN"/>
+        <parameter property="name" jdbcType="VARCHAR" mode="IN"/>
+    </parameterMap>
+
+    <select id = "getAgencyInfo" resultMap = "result" parameterMap = "param" statementType = "CALLABLE">
+        {call getAgencyInfo(
+            #{id, jdbcType = INTEGER, mode = IN},
+            #{name, jdbcType = VARCHAR, mode = IN}
+        )}
+    </select>
+
+    <select id = "getAgencyAll" resultMap = "result" statementType = "CALLABLE">
+      {call getAgencyAll()}
+    </select>
+
+</mapper>

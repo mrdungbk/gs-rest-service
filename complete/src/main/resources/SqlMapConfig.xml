@@ -16,6 +16,8 @@
 
 <mappers>
     <mapper resource = "Student.xml"/>
+    <mapper resource = "Agency.xml"/>
+    <mapper resource = "User.xml"/>
 </mappers>
 
 </configuration>
